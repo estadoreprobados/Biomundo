@@ -1,33 +1,28 @@
-# BioMundos — Simulador de evolución
+# BioMundos 2.0 — Simulador de evolución
 
-Página web educativa para experimentar con criaturas ficticias, genes heredables, mutaciones, supervivencia y formación de grupos genéticos.
+Actualización de la versión inicial. Mantiene la simulación de población, ambiente, selección, mutaciones, creación de criaturas, genes cuantitativos, gráfica e historia.
 
-## Publicar en GitHub Pages (desde Android o computadora)
+## Novedades 2.0
+- Registro de dos progenitores por descendiente y consulta de árbol familiar.
+- Cuatro rasgos hereditarios de ejemplo: alas, caparazón, visión nocturna y bigotes sensoriales.
+- Cada rasgo utiliza dos alelos: `A` dominante y `a` recesivo. El rasgo dominante se expresa con al menos una `A`; el recesivo requiere `a/a`.
+- Los descendientes reciben al azar un alelo de cada progenitor; las mutaciones pueden cambiar un alelo.
+- Algunos rasgos pueden influir ligeramente en la supervivencia ambiental.
+- Se registra en la historia cuando aparece un rasgo expresado que no estaba presente en ninguno de los dos progenitores.
 
-1. Descarga y descomprime `BioMundos-GitHub.zip`.
-2. En GitHub crea un repositorio nuevo, por ejemplo `biomundos`.
-3. Sube **todos los archivos y carpetas** que están dentro de la carpeta `evolucion_creaturas` (no subas la carpeta ZIP dentro del repositorio).
-4. En el repositorio abre **Settings → Pages**.
-5. En **Build and deployment**, selecciona **Deploy from a branch**.
-6. Elige la rama `main` y la carpeta `/ (root)`. Pulsa **Save**.
-7. Espera unos minutos. GitHub mostrará el enlace público de tu página en Settings → Pages.
+## Publicar en GitHub Pages desde Android
+1. Abre tu repositorio en GitHub y entra a la pestaña **Code**.
+2. Pulsa **Add file → Upload files**.
+3. Descomprime este ZIP antes de subirlo, o abre la carpeta `evolucion_creaturas` y selecciona los cinco archivos.
+4. Sube `index.html`, `styles.css`, `app.js`, `README.md` y `.nojekyll` a la raíz del repositorio (no dentro de otra carpeta).
+5. Confirma con **Commit changes**. GitHub Pages actualizará el sitio automáticamente.
+6. Recarga la página publicada. Si ves la versión anterior, recarga de nuevo o abre una pestaña privada.
 
 ## Archivos
-
 - `index.html`: estructura de la página.
-- `styles.css`: diseño adaptable a celulares y computadoras.
-- `app.js`: lógica de simulación, genes, herencia, mutaciones y selección.
+- `styles.css`: diseño adaptable a móviles y computadoras.
+- `app.js`: simulación, herencia, alelos y linajes.
+- `.nojekyll`: evita el procesamiento Jekyll de GitHub Pages.
 
-## Cómo experimentar
-
-- Pulsa **Avanzar 1 generación** para observar un ciclo.
-- Pulsa **Simular** para avanzar automáticamente; puedes pausarlo.
-- Cambia temperatura, alimento, depredación y tasa de mutación. Pulsa **Aplicar cambios**.
-- Crea organismos y ajusta sus genes para iniciar poblaciones con características diferentes.
-- Selecciona criaturas para consultar sus genes y habilidades.
-
-## Modelo científico
-
-Es una simulación didáctica y simplificada. Los genes se representan con valores de 0 a 100. La descendencia combina valores de dos progenitores y puede presentar mutaciones. La supervivencia depende de una puntuación ambiental aproximada. Los grupos de especie son agrupaciones visuales basadas en dieta y similitud genética; no equivalen a una definición biológica formal de especie ni a una simulación genética realista.
-
-No requiere servidor, base de datos, claves API ni instalación. Se ejecuta en el navegador.
+## Nota educativa
+Es un modelo didáctico, no un simulador biológico validado. La dominancia, los rasgos y la selección están simplificados. Los grupos genéticos mostrados como “especies” son aproximaciones por similitud y alimentación; no implementan aislamiento reproductivo ni el concepto biológico formal de especie. La gráfica histórica también es ilustrativa.
