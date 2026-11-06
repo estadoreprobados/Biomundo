@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14251f">
+  <title>BioMundos — Simulador de evolución</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">✳</span><div><strong>BioMundos</strong><small>Laboratorio de evolución virtual</small></div></div>
+    <div class="top-actions"><span class="status-dot"></span><span id="statusText">Ecosistema estable</span><button class="button ghost" id="resetBtn">Reiniciar mundo</button></div>
+  </header>
+
+  <main class="layout">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">SIMULACIÓN DE VIDA ARTIFICIAL</p>
+        <h1>La evolución ocurre<br><em>generación tras generación.</em></h1>
+        <p class="intro-copy">Crea criaturas, observa cómo se heredan sus genes y descubre qué sucede cuando el ambiente cambia.</p>
+      </div>
+      <div class="intro-art" aria-hidden="true"><span>◉</span><i>✳</i><b>⌁</b></div>
+    </section>
+
+    <section class="metrics" aria-label="Datos del ecosistema">
+      <article class="metric"><span>Generación</span><strong id="generation">0</strong><small>ciclos completados</small></article>
+      <article class="metric"><span>Población</span><strong id="population">0</strong><small>criaturas vivas</small></article>
+      <article class="metric"><span>Especies</span><strong id="speciesCount">0</strong><small>grupos genéticos</small></article>
+      <article class="metric"><span>Diversidad genética</span><strong id="diversity">0%</strong><small>variación de genes</small></article>
+    </section>
+
+    <div class="main-grid">
+      <section class="panel world-panel">
+        <div class="panel-heading"><div><p class="eyebrow">01 / OBSERVACIÓN</p><h2>Tu ecosistema</h2></div><span class="live-tag"><span></span> EN VIVO</span></div>
+        <div class="world" id="world" aria-label="Representación visual de las criaturas"></div>
+        <div class="world-legend"><span><i class="legend-dot herb"></i> Herbívoras</span><span><i class="legend-dot omni"></i> Omnívoras</span><span><i class="legend-dot carn"></i> Carnívoras</span></div>
+        <div class="controls">
+          <button class="button primary" id="stepBtn">Avanzar 1 generación <span>→</span></button>
+          <button class="button secondary" id="runBtn">▶ Simular</button>
+          <label class="speed-control">Velocidad <select id="speed"><option value="1200">Lenta</option><option value="600" selected>Normal</option><option value="220">Rápida</option></select></label>
+        </div>
+      </section>
+
+      <aside class="panel settings-panel">
+        <div class="panel-heading"><div><p class="eyebrow">02 / CONDICIONES</p><h2>Ambiente</h2></div><span class="setting-icon">☼</span></div>
+        <p class="muted">Modifica el entorno y observa qué rasgos ayudan a sobrevivir.</p>
+        <div class="setting"><div class="setting-label"><label for="temperature">Temperatura</label><strong id="temperatureValue">50</strong></div><input id="temperature" type="range" min="0" max="100" value="50"><div class="range-ends"><span>Frío</span><span>Calor</span></div></div>
+        <div class="setting"><div class="setting-label"><label for="food">Alimento disponible</label><strong id="foodValue">65</strong></div><input id="food" type="range" min="5" max="100" value="65"><div class="range-ends"><span>Escaso</span><span>Abundante</span></div></div>
+        <div class="setting"><div class="setting-label"><label for="predators">Presión de depredación</label><strong id="predatorsValue">30</strong></div><input id="predators" type="range" min="0" max="100" value="30"><div class="range-ends"><span>Ninguna</span><span>Alta</span></div></div>
+        <div class="setting"><div class="setting-label"><label for="mutation">Tasa de mutación</label><strong id="mutationValue">8</strong></div><input id="mutation" type="range" min="0" max="30" value="8"><div class="range-ends"><span>0%</span><span>30%</span></div></div>
+        <button class="button secondary full" id="applyBtn">Aplicar cambios al ambiente</button>
+        <p class="hint">Los cambios ambientales afectan la supervivencia en las siguientes generaciones.</p>
+      </aside>
+    </div>
+
+    <div class="lower-grid">
+      <section class="panel">
+        <div class="panel-heading"><div><p class="eyebrow">03 / GENÉTICA</p><h2>Biblioteca de criaturas</h2></div><button class="button small secondary" id="createBtn">＋ Crear criatura</button></div>
+        <p class="muted">Selecciona una criatura para estudiar sus genes, características y habilidades heredables.</p>
+        <div class="creature-list" id="creatureList"></div>
+        <div class="detail-card" id="creatureDetail"><div class="empty-state">Selecciona una criatura para ver su información genética.</div></div>
+      </section>
+      <section class="panel history-panel">
+        <div class="panel-heading"><div><p class="eyebrow">04 / RESULTADOS</p><h2>Historia evolutiva</h2></div><span class="history-icon">⌁</span></div>
+        <div class="chart-wrap"><canvas id="populationChart" width="600" height="220" aria-label="Gráfica de población por generación"></canvas></div>
+        <div class="history-log" id="historyLog"><p class="log-entry">El ecosistema está listo. Avanza una generación para comenzar.</p></div>
+      </section>
+    </div>
+
+    <section class="panel guide-panel">
+      <div class="panel-heading"><div><p class="eyebrow">05 / CONCEPTOS</p><h2>¿Qué está pasando?</h2></div></div>
+      <div class="concepts">
+        <article><span>01</span><h3>Herencia</h3><p>Las criaturas reciben una combinación de genes de sus progenitores. Por eso sus descendientes se parecen, pero no son idénticos.</p></article>
+        <article><span>02</span><h3>Mutación</h3><p>Algunos genes cambian al reproducirse. Una mutación puede ser útil, perjudicial o no producir una diferencia importante.</p></article>
+        <article><span>03</span><h3>Selección natural</h3><p>Las características compatibles con el ambiente pueden aumentar las probabilidades de sobrevivir y reproducirse.</p></article>
+        <article><span>04</span><h3>Especiación</h3><p>Si dos poblaciones quedan aisladas y acumulan diferencias genéticas durante muchas generaciones, pueden formar especies distintas.</p></article>
+      </div>
+      <p class="disclaimer">Modelo educativo simplificado: no representa toda la complejidad de la genética ni predice la evolución de organismos reales.</p>
+    </section>
+  </main>
+  <footer>BIOMUNDOS <span>·</span> Un pequeño laboratorio para explorar la vida y la evolución.</footer>
+
+  <dialog id="createDialog">
+    <form method="dialog" id="createForm">
+      <div class="dialog-head"><div><p class="eyebrow">NUEVO ORGANISMO</p><h2>Diseñar criatura</h2></div><button class="close" value="cancel" aria-label="Cerrar">×</button></div>
+      <label>Nombre<input id="newName" maxlength="18" value="Criatura nueva" required></label>
+      <label>Alimentación<select id="newDiet"><option value="herb">Herbívora</option><option value="omni" selected>Omnívora</option><option value="carn">Carnívora</option></select></label>
+      <div class="dialog-grid">
+        <label>Velocidad <output id="newSpeedVal">50</output><input id="newSpeed" type="range" min="0" max="100" value="50"></label>
+        <label>Resistencia <output id="newResVal">50</output><input id="newRes" type="range" min="0" max="100" value="50"></label>
+        <label>Camuflaje <output id="newCamVal">50</output><input id="newCam" type="range" min="0" max="100" value="50"></label>
+        <label>Adaptación térmica <output id="newThermVal">50</output><input id="newTherm" type="range" min="0" max="100" value="50"></label>
+      </div>
+      <button class="button primary full" id="saveCreature" value="default">Añadir al ecosistema</button>
+    </form>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>
